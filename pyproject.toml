@@ -1,0 +1,46 @@
+[project]
+name = "claude-node"
+version = "0.1.0"
+description = "Subprocess-based Claude CLI controller for multi-agent systems. No SDK dependency."
+readme = "README.md"
+license = {text = "Apache-2.0"}
+requires-python = ">=3.11"
+authors = [{name = "claude-node contributors"}]
+keywords = [
+    "claude",
+    "claude-code",
+    "multi-agent",
+    "agentic",
+    "stream-json",
+    "subprocess",
+    "llm",
+    "claude-cli",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests/unit", "tests/integration"]
+markers = [
+    "unit: unit tests that do not require the claude binary",
+    "integration: integration tests that require the claude binary",
+]
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["claude_node*"]

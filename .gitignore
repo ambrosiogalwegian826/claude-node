@@ -1,0 +1,41 @@
+# Bytecode
+__pycache__/
+*.py[cod]
+*.pyc
+
+# Test artifacts
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Distribution
+*.egg-info/
+dist/
+build/
+
+# Environment
+.env
+.env.local
+.venv/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp files
+*.tmp
+*.log
+*-session.jsonl
+
+# Agent tooling (private)
+.claude/
+.codex/
+.gemini/
+
+# Internal workflow (private)
+openspec/
+archive/
+
+# Project internals
+CLAUDE.md
