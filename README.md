@@ -28,26 +28,20 @@ ClaudeController  ───►   stdin/stdout   ───►   Claude Code runti
 
 ## Positioning
 
-### What this project is
+`claude-node` gives Python direct control over the real local Claude Code runtime. It preserves native CLI capabilities with `stream-json`, explicit session lifecycle, and process-level supervision — built for embedding and integration, not for hiding Claude behind another framework.
 
-`claude-node` is a:
+**What this is not**
 
-- **Python bridge** to a local Claude Code runtime,
-- **persistent session controller** for `claude --input-format stream-json`,
-- **runtime integration layer** for existing Python systems,
-- **protocol reference implementation** for developers who want to understand or embed the CLI.
+* Not another high-level agent framework
+* Not a reimplementation of Claude
+* Not a wrapper that hides the CLI behind a new abstraction
+* Not a workflow or memory platform
 
-### What this project is not
+**What this is**
 
-It is **not**:
-
-- an API SDK replacement,
-- a workflow engine,
-- a memory framework,
-- a dashboard product,
-- or a full “AI organization system”.
-
-The official Agent SDK provides a higher-level integration surface. `claude-node` takes a different position: it stays close to the CLI process itself, with minimal abstraction and explicit lifecycle control.
+* A thin Python runtime layer for controlling the real local Claude Code process
+* A subprocess-first integration surface with explicit session and process control
+* A practical foundation for embedding Claude Code into backends, workers, and internal tooling
 
 ---
 
